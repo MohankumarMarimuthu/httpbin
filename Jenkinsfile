@@ -29,5 +29,20 @@ pipeline {
                 }
             }
         }
+    stage('Deployment on k8s'){
+            steps{
+                sshagent(['k8s']) {
+                     sh "scp -r -o StrictHostKeyChecking=no travis.yml ubuntu@15.207.108.63:/home/ubuntu/deployments"
+                      script{
+                         try{
+                             sh "ssh ubuntu@15.207.108.63 kubectl apply -f /home/ubuntu/deployments/travis.yml"
+                         }
+                         catch(error){
+                             sh "ssh ubuntu@15.207.108.63 kubectl create -f /home/ubuntu/deployments/travis.yml"
+                         }
+                    }
+                }
+            }
+        }    
   }
 }

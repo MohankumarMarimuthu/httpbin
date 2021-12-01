@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpbin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpbin
+      //version: blue
+  template:
+    metadata:
+      name: httpbin-pod
+      labels:
+        app: httpbin
+        //version: blue
+    spec:
+      containers:
+      - name: httpbin-container
+        image: mk1325612/httpbin:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 90
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: httpbin-svc
+  labels:
+    app: httpbin
+spec:
+  selector:
+    app: httpbin
+    //version: blue
+  type: NodePort
+  ports:
+  - nodePort: 31123
+    port: 90
+    targetPort: 90

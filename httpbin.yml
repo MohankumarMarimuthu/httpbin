@@ -8,13 +8,11 @@ spec:
   selector:
     matchLabels:
       app: httpbin
-      //version: blue
-  template:
+    template:
     metadata:
       name: httpbin-pod
       labels:
-        app: httpbin
-        //version: blue
+        app: httpbin    
     spec:
       containers:
       - name: httpbin-container
@@ -32,7 +30,6 @@ metadata:
 spec:
   selector:
     app: httpbin
-    //version: blue
   type: NodePort
   ports:
   - nodePort: 31123

@@ -32,7 +32,7 @@ pipeline {
     stage('Deployment on k8s'){
             steps{
                 sshagent(['k8s']) {
-                     sh "scp -r -o StrictHostKeyChecking=no httpbin.yml ubuntu@15.207.108.63:/home/ubuntu/deployments"
+                     sh "scp -r -o StrictHostKeyChecking=no httpbin.yml ubuntu@3.110.127.197:/home/ubuntu/deployments"
                       script{
                          try{
                              sh "ssh ubuntu@3.110.127.197 kubectl apply -f /home/ubuntu/deployments/httpbin.yml"

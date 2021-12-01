@@ -35,10 +35,10 @@ pipeline {
                      sh "scp -r -o StrictHostKeyChecking=no httpbin.yml ubuntu@15.207.108.63:/home/ubuntu/deployments"
                       script{
                          try{
-                             sh "ssh ubuntu@15.207.108.63 kubectl apply -f /home/ubuntu/deployments/httpbin.yml"
+                             sh "ssh ubuntu@3.110.127.197 kubectl apply -f /home/ubuntu/deployments/httpbin.yml"
                          }
                          catch(error){
-                             sh "ssh ubuntu@15.207.108.63 kubectl create -f /home/ubuntu/deployments/httpbin.yml"
+                             sh "ssh ubuntu@3.110.127.197 kubectl create -f /home/ubuntu/deployments/httpbin.yml"
                          }
                     }
                 }
